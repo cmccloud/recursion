@@ -59,6 +59,7 @@
 
 (defn seq= [a-seq b-seq]
   (cond (empty? a-seq) (empty? b-seq)
+        (empty? b-seq) (empty? a-seq)
         (and (= (first a-seq)
                 (first b-seq))) (seq= (rest a-seq)
                                       (rest b-seq))
@@ -84,9 +85,9 @@
 
 (defn my-repeat [how-many-times what-to-repeat]
   (if (<= how-many-times 0) '()
-      (cons (what-to-repeat
+      (cons what-to-repeat
              (my-repeat (dec how-many-times)
-                        what-to-repeat)))))
+                        what-to-repeat))))
 
 (defn my-range [up-to]
   (if (<= up-to 0) '()
@@ -94,7 +95,10 @@
             (my-range (dec up-to)))))
 
 (defn tails [a-seq]
-  [:-])
+  (if (empty? a-seq)
+    (cons a-seq nil)
+    (cons a-seq
+          (tails (rest a-seq)))))
 
 (defn inits [a-seq]
   [:-])
