@@ -58,7 +58,11 @@
         :else a-seq))
 
 (defn seq= [a-seq b-seq]
-  :-)
+  (cond (empty? a-seq) (empty? b-seq)
+        (and (= (first a-seq)
+                (first b-seq))) (seq= (rest a-seq)
+                                      (rest b-seq))
+                :else false))
 
 (defn my-map [f seq-1 seq-2]
   [:-])
