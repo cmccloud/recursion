@@ -105,7 +105,11 @@
                 (tails (reverse a-seq)))))
 
 (defn rotations [a-seq]
-  [:-])
+  (if (empty? a-seq)
+    (cons '() nil)
+    (rest (my-map concat
+                  (tails a-seq)
+                  (inits a-seq)))))
 
 (defn my-frequencies-helper [freqs a-seq]
   [:-])
