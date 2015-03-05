@@ -140,7 +140,12 @@
     (my-drop (dec n) (rest coll))))
 
 (defn halve [a-seq]
-  [:-])
+  (let [half-length (if (odd? (count a-seq))
+                      (/ (dec (count a-seq)) 2)
+                      (/ (count a-seq) 2))]
+    (vec (conj (cons (my-drop half-length a-seq)
+                     nil)
+               (my-take half-length a-seq)))))
 
 (defn seq-merge [a-seq b-seq]
   [:-])
