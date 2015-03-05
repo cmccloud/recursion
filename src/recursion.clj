@@ -148,7 +148,14 @@
                (my-take half-length a-seq)))))
 
 (defn seq-merge [a-seq b-seq]
-  [:-])
+  (let [first-a (first a-seq)
+        first-b (first b-seq)]
+    (cond (empty? a-seq) b-seq
+          (empty? b-seq) a-seq
+          (<= first-a first-b) (cons first-a
+                                     (seq-merge (rest a-seq) b-seq))
+          :else (cons first-b
+                      (seq-merge a-seq (rest b-seq))))))
 
 (defn merge-sort [a-seq]
   [:-])
