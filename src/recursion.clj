@@ -158,7 +158,11 @@
                       (seq-merge a-seq (rest b-seq))))))
 
 (defn merge-sort [a-seq]
-  [:-])
+  (let [[first-half second-half] (halve a-seq)]
+    (cond (empty? a-seq) a-seq
+          (singleton? a-seq) a-seq
+          :else (seq-merge (merge-sort first-half)
+                           (merge-sort second-half)))))
 
 (defn split-into-monotonics [a-seq]
   [:-])
