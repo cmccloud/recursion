@@ -34,12 +34,10 @@
                        (longest-sequence (rest a-seq)))))
 
 (defn my-filter [pred? a-seq]
-  (if (empty? a-seq)
-    a-seq
-    (if (pred? (first a-seq))
-      (cons (first a-seq)
-            (my-filter pred? (rest a-seq)))
-      (my-filter pred? (rest a-seq)))))
+  (cond (empty? a-seq) a-seq
+        (pred? (first a-seq)) (cons (first a-seq)
+                                    (my-filter pred? (rest a-seq)))
+        :else (my-filter pred? (rest a-seq))))
 
 (defn sequence-contains? [elem a-seq]
   (cond (empty? a-seq) false
@@ -112,10 +110,15 @@
                   (inits a-seq)))))
 
 (defn my-frequencies-helper [freqs a-seq]
-  [:-])
+  (if (empty? a-seq)
+    freqs
+    (let [key (first a-seq)
+          val (or (get freqs key) 0)]
+      (my-frequencies-helper (assoc freqs key (inc val))
+                             (rest a-seq)))))
 
 (defn my-frequencies [a-seq]
-  [:-])
+  (my-frequencies-helper {} a-seq))
 
 (defn un-frequencies [a-map]
   [:-])
